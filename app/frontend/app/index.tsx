@@ -1,3 +1,17 @@
+import { Redirect } from "expo-router";
+import { useAuth } from "@/src/auth";
+import { Loading } from "@/src/ui";
+import { View } from "react-native";
+import { useTheme } from "@/src/theme";
+
+export default function Index() {
+  const { user, loading } = useAuth();
+  const { colors } = useTheme();
+  if (loading) return <View style={{ flex: 1, backgroundColor: colors.surface }}><Loading testID="boot-loading" /></View>;
+  if (!user) return <Redirect href="/login" />;
+  return <Redirect href="/(tabs)" />;
+}
+
 import { View, StyleSheet, Image } from "react-native";
 
 const EXPO_PUBLIC_BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
