@@ -122,6 +122,83 @@ export function makeStyles<T extends StyleSheet.NamedStyles<T> | StyleSheet.Name
     return useMemo(() => StyleSheet.create(factory(colors)), [colors]);
   };
 }
+// Dark-first gaming theme (NexusArena). Single dark palette lives in `light`
+// so it always renders regardless of device setting.
+import { useMemo } from "react";
+import { Appearance, StyleSheet, useColorScheme } from "react-native";
+
+export type ColorScheme = "light" | "dark";
+
+const light = {
+  surface: "#090D14",
+  onSurface: "#F1F5F9",
+  surfaceSecondary: "#111827",
+  onSurfaceSecondary: "#E2E8F0",
+  surfaceTertiary: "#1B2436",
+  onSurfaceTertiary: "#94A3B8",
+  surfaceInverse: "#F8FAFC",
+  onSurfaceInverse: "#090D14",
+  muted: "#64748B",
+
+  brand: "#00FF9D",
+  onBrand: "#051A10",
+  brandPrimary: "#00FF9D",
+  onBrandPrimary: "#051A10",
+  brandSecondary: "#05DF85",
+  onBrandSecondary: "#051A10",
+  brandTertiary: "rgba(0, 255, 157, 0.12)",
+  onBrandTertiary: "#00FF9D",
+
+  success: "#10B981",
+  onSuccess: "#FFFFFF",
+  warning: "#F59E0B",
+  onWarning: "#1C1100",
+  error: "#EF4444",
+  onError: "#FFFFFF",
+  info: "#06B6D4",
+  onInfo: "#032830",
+
+  border: "rgba(255, 255, 255, 0.08)",
+  borderStrong: "rgba(0, 255, 157, 0.4)",
+  divider: "rgba(255, 255, 255, 0.06)",
+
+  stationFree: "#10B981",
+  onStationFree: "#042617",
+  stationPlaying: "#EF4444",
+  onStationPlaying: "#FFFFFF",
+  stationBooked: "#F59E0B",
+  onStationBooked: "#1C1100",
+  stationMaintenance: "#475569",
+  onStationMaintenance: "#E2E8F0",
+  rigPs5: "#05DF85",
+  rigPc: "#38BDF8",
+};
+
+export type ThemeColors = typeof light;
+export const defaultScheme = "light" satisfies ColorScheme;
+export const themes: { light: ThemeColors; dark?: ThemeColors } = { light };
+
+export function setColorScheme(scheme: ColorScheme | null) {
+  Appearance.setColorScheme?.(scheme ?? "unspecified");
+}
+setColorScheme?.(themes.dark ? null : defaultScheme);
+
+export function useTheme(): { scheme: ColorScheme; colors: ThemeColors } {
+  const system = useColorScheme();
+  const scheme: ColorScheme = system && themes[system] ? system : defaultScheme;
+  return { scheme, colors: themes[scheme] ?? themes.light };
+}
+
+export function makeStyles<T extends StyleSheet.NamedStyles<T> | StyleSheet.NamedStyles<any>>(
+  factory: (colors: ThemeColors) => T & StyleSheet.NamedStyles<any>,
+): () => T {
+  return function useStyles(): T {
+    const { colors } = useTheme();
+    return useMemo(() => StyleSheet.create(factory(colors)), [colors]);
+  };
+}
+
+export const colors = light;
 
 
 
