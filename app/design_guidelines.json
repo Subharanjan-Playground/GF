@@ -1,0 +1,240 @@
+{
+  "app_name": "NexusArena Gaming Cafe Operations",
+  "personality": "7 Dark-First Utility DARK",
+  "personality_one_liner": "A high-precision, tactical esports operations console designed for gaming cafe managers and floor staff to monitor dual-branch rigs, manage live station telemetry, stream POS snacks, and control high-speed walk-in sessions.",
+  "color": {
+    "surface": "#090D14",
+    "onSurface": "#F1F5F9",
+    "surfaceSecondary": "#111827",
+    "onSurfaceSecondary": "#E2E8F0",
+    "surfaceTertiary": "#1B2436",
+    "onSurfaceTertiary": "#94A3B8",
+    "surfaceInverse": "#F8FAFC",
+    "onSurfaceInverse": "#090D14",
+    "brand": "#00FF9D",
+    "brandPrimary": "#00FF9D",
+    "onBrandPrimary": "#051A10",
+    "brandSecondary": "#05DF85",
+    "onBrandSecondary": "#051A10",
+    "brandTertiary": "rgba(0, 255, 157, 0.12)",
+    "onBrandTertiary": "#00FF9D",
+    "success": "#10B981",
+    "onSuccess": "#FFFFFF",
+    "warning": "#F59E0B",
+    "onWarning": "#1C1100",
+    "error": "#EF4444",
+    "onError": "#FFFFFF",
+    "info": "#06B6D4",
+    "onInfo": "#032830",
+    "border": "rgba(255, 255, 255, 0.08)",
+    "borderStrong": "rgba(0, 255, 157, 0.4)",
+    "divider": "rgba(255, 255, 255, 0.06)",
+    "muted": "#64748B",
+    "onBrand": "#051A10",
+    "stationFree": "#10B981",
+    "onStationFree": "#042617",
+    "stationPlaying": "#EF4444",
+    "onStationPlaying": "#FFFFFF",
+    "stationBooked": "#F59E0B",
+    "onStationBooked": "#1C1100",
+    "stationMaintenance": "#475569",
+    "onStationMaintenance": "#E2E8F0",
+    "rigPs5": "#05DF85",
+    "rigPc": "#38BDF8"
+  },
+  "typography": {
+    "displayFontFamily": "SpaceGrotesk-Medium",
+    "textFontFamily": "PlusJakartaSans-Regular",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    },
+    "maxWeight": 500
+  },
+  "spacing": {
+    "rule": "High-density command center rhythm with clear grouping, comfortable tap zones (>=44pt), and sticky bottom actions over scrolling lists.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 10,
+    "lg": 16,
+    "pill": 999
+  },
+  "shadow_tier": 0,
+  "navigation": "bottom_tabs",
+  "icon_set": "Ionicons",
+  "glassmorphism": {
+    "enabled": true,
+    "dos": [
+      "Use subtle glass with >=75% dark tint on sticky bottom CTA bars and filter chips",
+      "Use backdrop blur on station telemetry drawer modals and quick-bill drawers",
+      "Keep text on top of glass high-contrast with onSurface tokens"
+    ],
+    "donts": [
+      "Never put blur over raw station metric numbers or rapid timers",
+      "Do not use heavy multi-colored glass cards in data-dense table views"
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-blur",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Floor / Live Stations",
+      "purpose": "Primary operational floor console showing live station cards (FREE / PLAYING / BOOKED / MAINTENANCE) with real-time countdown timers, current rate, rig hardware badges, and instant quick-actions.",
+      "states": {
+        "loading": "Centered esports telemetry spinner with animated neon scanline skeleton placeholders for station tiles",
+        "empty": "Station icon illustration + 'No gaming stations found for selected shop or filter' + 'Add Station' CTA",
+        "error": "Telemetry sync error banner with detailed error code and 'Retry Live Sync' CTA"
+      },
+      "layout": "Sticky Shop Switcher Header (Shop 1: Cyber Arena Indiranagar vs Shop 2: Neon Zone Koramangala) + Filter Chip Row (All, PS5, PC Master, Free, Playing, Booked) + 2-Column Responsive Tactical Grid of Station Cards + Floating Walk-in Session Action Bar at bottom with safe area padding."
+    },
+    {
+      "name": "Owner Dashboard",
+      "purpose": "High-level dual-branch business intelligence view featuring today's revenue, active hours, rig utilization % comparison, snack sales, and live floor occupancy comparison.",
+      "states": {
+        "loading": "Metric card skeletons with pulsating gradient bars",
+        "empty": "Bar chart icon + 'No session data recorded for this date range' + 'Switch Date Range' button",
+        "error": "Financial sync error message with 'Reload Financials' CTA"
+      },
+      "layout": "Dual-Branch Comparison Toggle + KPI Metric Tiles (Today Total Revenue ₹, Active Hours, Occupancy %, Peak Load) + Side-by-side Revenue Breakdown Chart (Gaming Time vs F&B Snacks) + Recent High-Roller Sessions Feed + Low Inventory Alert Strip."
+    },
+    {
+      "name": "Walk-in & Quick Session Modal",
+      "purpose": "High-speed counter workflow to assign a customer to an available PC or PS5 station, select hourly package or open-ended post-pay mode, add gamer tag / phone, and launch timer in under 5 seconds.",
+      "states": {
+        "loading": "Station availability checking spinner",
+        "empty": "No stations available illustration + 'All stations currently occupied. Add to waitlist queue.' CTA",
+        "error": "Validation alert banner with 'Fix Form & Retry' CTA"
+      },
+      "layout": "Header with selected Station badge + Customer Quick Search / New Gamer input (Phone / Tag) + Duration Selector Pills (1h ₹120, 2h ₹220, 3h ₹300, All-Night Pass ₹699, Open Timer) + Snack upsell addon drawer + Large bottom sticky 'Launch Session (₹)' primary button."
+    },
+    {
+      "name": "Station Detail & Live Telemetry",
+      "purpose": "Focused control panel for a single station to monitor live elapsed/remaining countdown, current bill breakdown (gaming + snacks), add extra time, add snacks, switch station, or end session & generate GST bill.",
+      "states": {
+        "loading": "Station stream loader",
+        "empty": "Station offline icon + 'Station is currently decommissioned' + 'Mark Active' CTA",
+        "error": "Connection drop warning banner with manual override options"
+      },
+      "layout": "Station Header with Hardware Spec (e.g., RTX 4080 240Hz / PS5 Disc + DualSense) + Live Giant HUD Countdown Timer + Active Gamer profile pill + Running Bill Accordion (Time Cost ₹ + Attached Food & Drinks ₹) + Quick Action Matrix (Extend 30m, Add Snacks, Pause, End & Settle Bill)."
+    },
+    {
+      "name": "POS & Snacks Bar",
+      "purpose": "Fast-tap food & beverage catalog for energy drinks, snacks, cold water, and ramen with instant station attach or takeaway checkout.",
+      "states": {
+        "loading": "Product card grid skeleton",
+        "empty": "F&B cup illustration + 'No items found in this snack category' + 'Clear Filter' CTA",
+        "error": "POS catalog load error with 'Refresh Catalog' CTA"
+      },
+      "layout": "Category Navigation Pills (All, Energy Drinks, Chips & Snacks, Cold Beverages, Hot Ramen/Meals) + 2-Column Product Grid with high-contrast price tags in ₹ and stock count badges + Sticky Floating Cart Drawer bar showing total item count and 'Attach to Station / Checkout ₹' CTA."
+    },
+    {
+      "name": "Bookings & Slot Reservations",
+      "purpose": "Timeline and list of advance customer bookings for PC tournament squads and PS5 couch-coop gaming sessions across both shops.",
+      "states": {
+        "loading": "Booking calendar skeleton cards",
+        "empty": "Calendar icon + 'No advance bookings scheduled for today' + 'Create Reservation' CTA",
+        "error": "Booking calendar sync error + 'Retry' CTA"
+      },
+      "layout": "Shop Selector + Date Horizontal Scroller + Status Filter (Upcoming, Confirmed, Checked-in, Cancelled) + Booking Card List with customer phone, advance deposit ₹, requested game, and 'Check-in to Station' button."
+    },
+    {
+      "name": "Inventory & Stock Tracking",
+      "purpose": "Real-time stock management for cold drinks, chips, peripherals (controllers, headsets), and low-stock replenishment reorders for both shops.",
+      "states": {
+        "loading": "Inventory list skeleton",
+        "empty": "Box package illustration + 'Inventory catalog is empty' + 'Add Item' CTA",
+        "error": "Stock registry error + 'Refresh' CTA"
+      },
+      "layout": "Search Bar + Low Stock Quick Warning Banner + Tabbed Category List (Drinks, Food, Hardware/Peripherals) + Stock item rows with in-stock stepper adjustments and cost per unit."
+    },
+    {
+      "name": "Customers & Gamer Profiles",
+      "purpose": "Directory of gamers, visit frequency, lifetime spend, wallet credit balances, VIP rank badges, and WhatsApp invoice dispatch status.",
+      "states": {
+        "loading": "Customer card list skeleton",
+        "empty": "User profile illustration + 'No customer records match search' + 'Register Gamer' CTA",
+        "error": "Database retrieval error + 'Retry' CTA"
+      },
+      "layout": "Search by Mobile/GamerTag + VIP / Member tier filter + Customer List Cards (Name, Phone, Total Hours, Wallet Balance ₹, Preferred Rig) + Tap to Top-up Wallet / View Session History."
+    },
+    {
+      "name": "Reports & Analytics",
+      "purpose": "Comprehensive audit & operational reports with daily cash/UPI settlement, game popularity rankings (e.g. Valorant, FC 25, GTA V, Tekken 8), and staff shift logs.",
+      "states": {
+        "loading": "Analytics chart skeletons",
+        "empty": "Analytics report icon + 'No settlement records found for selected period' CTA",
+        "error": "Report aggregation failed + 'Retry' CTA"
+      },
+      "layout": "Date Range Picker + Branch Filter + Summary Cards (Total Cash, Total UPI/Card, Discount/Voucher deductions, Net Profit) + Top Games Played Table + Export PDF/WhatsApp Summary action bar."
+    },
+    {
+      "name": "Authentication & Branch Switcher",
+      "purpose": "Secure pin/password login supporting Role-Based Access (Owner, Manager, Staff Counter, Customer Kiosk) and instant active shop branch assignment.",
+      "states": {
+        "loading": "Biometric & Auth verification spinner",
+        "empty": "Account selector state",
+        "error": "Invalid PIN / Branch unassigned warning alert"
+      },
+      "layout": "Branded NexusArena Cyber Logo + Role Badge Switcher (Owner Admin vs Counter Staff) + Numeric Keypad / PIN input + Active Branch selector card (Indiranagar Cyber vs Koramangala Neon) + 'Access Floor Console' primary action button."
+    }
+  ],
+  "images": {
+    "pc_rig_hero": {
+      "url": "https://images.unsplash.com/photo-1632603093711-0d93a0bcc6cc?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzZ8MHwxfHNlYXJjaHwxfHxnYW1pbmclMjBwYyUyMHNldHVwJTIwcmdiJTIwZGFyayUyMHJvb218ZW58MHx8fHwxNzkwNjczNDE3fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Dual monitor esports PC gaming station with mechanical keyboard and RGB lighting"
+    },
+    "ps5_console_station": {
+      "url": "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDJ8MHwxfHNlYXJjaHwyfHxwbGF5c3RhdGlvbiUyMDUlMjBjb25zb2xlJTIwZ2FtaW5nJTIwc2V0dXB8ZW58MHx8fHwxNzkwNjczNDE3fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "PlayStation 5 console with DualSense wireless controller setup"
+    },
+    "gaming_arena_floor": {
+      "url": "https://images.unsplash.com/photo-1758410473603-616660032c2a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NjZ8MHwxfHNlYXJjaHw0fHxlc3BvcnRzJTIwYXJlbmElMjBnYW1pbmclMjB0b3VybmFtZW50JTIwc3RhZ2V8ZW58MHx8fHwxNzkwNjczNDE3fDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Gaming cafe floor with rows of active players and telemetry ambient lights"
+    },
+    "snack_energy_drink": {
+      "url": "https://images.unsplash.com/photo-1634693654243-a4f03785cba4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHwxfHxjb2xkJTIwZW5lcmd5JTIwZHJpbmslMjBjYW58ZW58MHx8fHwxNzkwNjczNDIzfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Chilled Monster energy drink on dark surface"
+    },
+    "snack_chips_pack": {
+      "url": "https://images.unsplash.com/photo-1613919113640-25732ec5e61f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwxfHxwb3RhdG8lMjBjaGlwcyUyMHNuYWNrJTIwcGFja3xlbnwwfHx8fDE3OTA2NzM0MjN8MA&ixlib=rb-4.1.0&q=85",
+      "alt": "Crispy seasoned potato chips snack pack"
+    },
+    "snack_redbull_can": {
+      "url": "https://images.unsplash.com/photo-1642532560930-77d5018c68f7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODl8MHwxfHNlYXJjaHw0fHxjb2xkJTIwZW5lcmd5JTIwZHJpbmslMjBjYW58ZW58MHx8fHwxNzkwNjczNDIzfDA&ixlib=rb-4.1.0&q=85",
+      "alt": "Cold Red Bull energy drink can on frosted surface"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Strictly follow the Dark-First Utility palette with electric neon emerald (#00FF9D) as the primary active brand hue, deep obsidian (#090D14) for root canvas, and graphite (#111827) for cards.",
+    "Banned colors: No purple, no indigo, no generic blue corporate default. Keep all surfaces dark obsidian and carbon with high contrast text.",
+    "Status Indicator Protocol: FREE stations must display Emerald (#10B981) pill, PLAYING stations must display Bright Ember Red (#EF4444) pill with live dynamic countdown/elapsed timer, BOOKED stations must display Amber (#F59E0B) pill, and MAINTENANCE stations must display Muted Slate (#475569) pill.",
+    "Currency formatting: Always format money values with Indian Rupee symbol (₹) and comma separation (e.g., ₹120, ₹1,450).",
+    "Font weights: Strictly cap font weight at 500 maximum across all headers, cards, and data badges. Use font size scale (sm:12 to 2xl:24) for hierarchy rather than fake heavy bolding.",
+    "Dual Shop Branch Support: Every core view (Floor, Owner Dashboard, Inventory, Bookings, Reports) must have an instant branch toggle (e.g. 'Shop 1: Indiranagar' vs 'Shop 2: Koramangala') or 'All Shops' aggregate mode for Owner role.",
+    "Touch Targets & Haptics: All station cards, POS cart add/remove buttons, and session action triggers must meet minimum 44x44pt touch targets with subtle haptic feedback on action commit.",
+    "Sticky Bottom CTA: Walk-in session builder, POS checkout cart, and Station Session End bill drawers must have anchored bottom containers above safe area with top subtle border divider so content scrolls smoothly beneath without obstruction.",
+    "Zero Emoji Policy: No emoji anywhere in system UI. Use Ionicons vector icons with single consistent outline/fill styling."
+  ]
+}
+
